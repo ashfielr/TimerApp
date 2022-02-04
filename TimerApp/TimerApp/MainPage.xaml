@@ -35,13 +35,13 @@
         </StackLayout>
 
         <Label Grid.Row="2" Grid.Column="0" Text="Hours:" FontSize="25" VerticalOptions="CenterAndExpand" />
-        <Entry Grid.Row="2" Grid.Column="1" Placeholder="Hours" Text="{Binding Hrs, Mode=OneWayToSource}" VerticalOptions="CenterAndExpand"/>
+        <Entry Grid.Row="2" Grid.Column="1" Placeholder="Hours" Text="{Binding Hrs, Mode=TwoWay}" VerticalOptions="CenterAndExpand"/>
 
         <Label Grid.Row="3" Grid.Column="0" Text="Minutes:" FontSize="25" VerticalOptions="CenterAndExpand" />
-        <Entry Grid.Row="3" Grid.Column="1" Placeholder="Minutes" Text="{Binding Mins, Mode=OneWayToSource}" VerticalOptions="CenterAndExpand"/>
+        <Entry Grid.Row="3" Grid.Column="1" Placeholder="Minutes" Text="{Binding Mins, Mode=TwoWay}" VerticalOptions="CenterAndExpand"/>
 
         <Label Grid.Row="4" Grid.Column="0" Text="Seconds:" FontSize="25" VerticalOptions="CenterAndExpand" />
-        <Entry Grid.Row="4" Grid.Column="1" Placeholder="Seconds" Text="{Binding Sec, Mode=OneWayToSource}" VerticalOptions="CenterAndExpand" />
+        <Entry Grid.Row="4" Grid.Column="1" Placeholder="Seconds" Text="{Binding Sec, Mode=TwoWay}" VerticalOptions="CenterAndExpand" />
 
         <StackLayout Grid.Row="5" Grid.ColumnSpan="2" >
             <Button Text="SET" Command="{Binding SetTimerCommand}"/>
