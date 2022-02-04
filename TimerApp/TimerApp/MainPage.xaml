@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:vm="clr-namespace:TimerApp.ViewModels"
+             x:Class="TimerApp.MainPage">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <System:Int16 x:Key="TimerFontSize">75</System:Int16>
+    </ContentPage.Resources>
+    <Grid Margin="5,0,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Label Text="00" FontSize="75"/>
+            <Label Text=":" FontSize="75"/>
+            <Label Text="00" FontSize="75"/>
+            <Label Text=":" FontSize="75"/>
+            <Label Text="00" FontSize="75"/>
+        </StackLayout>
+
+        <Label Grid.Row="2" Grid.Column="0" Text="Hours:" FontSize="25" VerticalOptions="CenterAndExpand" />
+        <Entry Grid.Row="2" Grid.Column="1" Placeholder="Hours" VerticalOptions="CenterAndExpand"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Text="Minutes:" FontSize="25" VerticalOptions="CenterAndExpand" />
+        <Entry Grid.Row="3" Grid.Column="1" Placeholder="Minutes" VerticalOptions="CenterAndExpand"/>
+
+        <Label Grid.Row="4" Grid.Column="0" Text="Seconds:" FontSize="25" VerticalOptions="CenterAndExpand" />
+        <Entry Grid.Row="4" Grid.Column="1" Placeholder="Seconds" VerticalOptions="CenterAndExpand" />
+
+        <StackLayout Grid.Row="5" Grid.ColumnSpan="2" >
+            <Button Text="SET" />
+            <Button Text="CLEAR" />
+        </StackLayout>
+        
+
+        <Button Grid.Row="6" Text="START" HorizontalOptions="FillAndExpand"/>
+        <Button Grid.Row="6" Grid.Column="1" Text="END" HorizontalOptions="FillAndExpand"/>
+                
+    </Grid>
+
+</ContentPage>
