@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -15,6 +17,7 @@ namespace TimerApp.ViewModels
         private int _hrs;
         private int _mins;
         private int _sec;
+        private bool _timerOn = false;
 
         public int TimerHrs
         {
@@ -25,6 +28,8 @@ namespace TimerApp.ViewModels
                 {
                     _timerhrs = value;
                     OnPropertyChanged(nameof(TimerHrs));
+                    StartTimerCommand.ChangeCanExecute();
+                    StopTimerCommand.ChangeCanExecute();
                 }
             }
         }
@@ -38,6 +43,8 @@ namespace TimerApp.ViewModels
                 {
                     _timermins = value;
                     OnPropertyChanged(nameof(TimerMins));
+                    StartTimerCommand.ChangeCanExecute();
+                    StopTimerCommand.ChangeCanExecute();
                 }
             }
         }
@@ -51,6 +58,8 @@ namespace TimerApp.ViewModels
                 {
                     _timersec = value;
                     OnPropertyChanged(nameof(TimerSec));
+                    StartTimerCommand.ChangeCanExecute();
+                    StopTimerCommand.ChangeCanExecute();
                 }
             }
         }
@@ -99,12 +108,21 @@ namespace TimerApp.ViewModels
         {
             SetTimerCommand = new Command(SetTimer);
             ClearTimerCommand = new Command(ClearTimer);
+
+            StartTimerCommand = new Command(StartTimerAsync, () =>
+            {
+                return (TimerHrs>0 || TimerMins>0 || TimerSec>0) && !_timerOn;
+            });
+            StopTimerCommand = new Command(StopTimer, () =>
+            {
+                return (TimerHrs > 0 || TimerMins > 0 || TimerSec > 0) && _timerOn;
+            });
         }
 
         public ICommand SetTimerCommand { get; set; }
         public ICommand ClearTimerCommand { get; set; }
-        public ICommand StartTimerCommand { get; set; }
-        public ICommand StopTimerCommand { get; set; }
+        public Command StartTimerCommand { get; set; }
+        public Command StopTimerCommand { get; set; }
 
         private void SetTimer()
         {
@@ -121,6 +139,37 @@ namespace TimerApp.ViewModels
             Hrs = 0;
             Mins = 0;
             Sec = 0;
+        }
+
+        private async void StartTimerAsync()
+        {
+            _timerOn = true;
+            StartTimerCommand.ChangeCanExecute();
+            StopTimerCommand.ChangeCanExecute();
+            while(_timerOn && (TimerHrs > 0 || TimerMins>0 || TimerSec > 0))
+            {
+                await Task.Delay(1000);
+                TimerSec -= 1;
+                if (TimerSec == 0 && TimerMins > 0)
+                {
+                    TimerMins -= 1;
+                    TimerSec = 60;
+                }
+
+                if (TimerMins == 0 && TimerHrs > 0)
+                {
+                    TimerHrs -= 1;
+                    TimerMins = 60;
+                }
+            }
+            
+        }
+
+        private void StopTimer()
+        {
+            _timerOn = false;
+            StartTimerCommand.ChangeCanExecute();
+            StopTimerCommand.ChangeCanExecute();
         }
 
     }

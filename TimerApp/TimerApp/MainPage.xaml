@@ -50,7 +50,7 @@
         
 
         <Button Grid.Row="6" Text="START" Command="{Binding StartTimerCommand}" HorizontalOptions="FillAndExpand"/>
-        <Button Grid.Row="6" Grid.Column="1" Command="{Binding StopTimerCommand}" Text="END" HorizontalOptions="FillAndExpand"/>
+        <Button Grid.Row="6" Grid.Column="1" Command="{Binding StopTimerCommand}" Text="STOP" HorizontalOptions="FillAndExpand"/>
                 
     </Grid>
 
